@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://your-application-url.com",
+  "username": "admin",
+  "password": "password123",
+  "timeout": 30000
+}
