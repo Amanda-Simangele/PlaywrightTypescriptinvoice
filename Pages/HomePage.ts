@@ -1,28 +1,37 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { BasePage } from '../Base/BasePage';
 
-export class LoginPage extends BasePage {
-
-    readonly heading: Locator;
-    readonly loginButton: Locator;
+export class HomePage extends BasePage {
 
     constructor(page: Page) {
         super(page);
+    }
 
-        this.heading = page.getByRole('heading', {
-            name: 'Train like a real test automation engineer'
-        });
+    // ==========================
+    // Locators
+    // ==========================
 
-        this.loginButton = page.getByRole('button', {
+
+    get loginButton(): Locator {
+        return this.page.getByRole('button', {
             name: 'Login'
         });
     }
 
-    async verifyHomePage(): Promise<void> {
-        await expect(this.heading).toBeVisible();
+    // ==========================
+    // Business Methods
+    // ==========================
+
+    async navigateToHomePage(): Promise<void> {
+    await this.basePageGoToUrl('/');
+}
+
+    async verifyLoginIsDisplayed(): Promise<void> {
+        await this.basePageVerifyElementIsVisible(this.loginButton);
     }
 
     async clickLoginButton(): Promise<void> {
-        await this.click(this.loginButton);
+        await this.basePageClickElement(this.loginButton);
     }
+
 }

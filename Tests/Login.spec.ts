@@ -1,14 +1,20 @@
-import { test } from '@playwright/test';
-import { LoginPage } from '../Pages/LoginPage';
+import { test } from '../Fixtures/testFixture';
+import { LoginData } from '../Data/LoginData';
 
-test('Verify user can navigate to Login page', async ({ page }) => {
+test('Verify user can login successfully', async ({ homePage, loginPage }) => {
 
-    const loginPage = new LoginPage(page);
+    await homePage.navigateToHomePage();
 
-    await loginPage.navigate('YOUR_APPLICATION_URL');
+    await homePage.verifyLoginIsDisplayed();
 
-    await loginPage.verifyHomePage();
+    await homePage.clickLoginButton();
 
-    await loginPage.clickLoginButton();
+    await loginPage.verifyLoginPageIsDisplayed();
+
+    await loginPage.login(
+        LoginData.validUser.email,
+        LoginData.validUser.password
+    
+    );
 
 });
