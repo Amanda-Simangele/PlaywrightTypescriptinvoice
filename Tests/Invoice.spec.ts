@@ -1,7 +1,7 @@
-import { test } from '../Fixtures/testFixture';
+import { test,expect } from '../Fixtures/testFixture';
 import { LoginData } from '../Data/LoginData';
 
-test('create invoice', async ({ homePage, loginPage, landingPage, adminPanelPage }) => {
+test('create invoice', async ({ homePage, loginPage, landingPage, adminPanelPage,page }) => {
 
     await homePage.navigateToHomePage();
 
@@ -20,6 +20,7 @@ test('create invoice', async ({ homePage, loginPage, landingPage, adminPanelPage
     await landingPage.clickMenu();
     await landingPage.clickAdminPanelButton();
     await adminPanelPage.clickInvoicesButton();
+
     await adminPanelPage.clickNewInvoicesButton();
     await adminPanelPage.enterClientName('Your Name Pty Ltd');
 

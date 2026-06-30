@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page ,expect} from '@playwright/test';
 import { BasePage } from '../Base/BasePage';
 
 export class AdminPanelPage extends BasePage {
@@ -31,9 +31,10 @@ export class AdminPanelPage extends BasePage {
         return this.page.getByPlaceholder('Enter client address...');
     }
 
-    get addCourseButton() {
-    return this.page.locator('//button[@type="button" and contains(text(), "Add Course")]');
-}
+    get addCourseButton() {  
+         return this.page.getByRole('button', { name: '➕ Add Course' });
+
+    }
 
     get courseDropDowns(): Locator {
         return this.page.locator('tbody select');
@@ -85,17 +86,17 @@ export class AdminPanelPage extends BasePage {
 
     async clickFirstAddressField(): Promise<void> {
     await this.basePageClickElement(this.addressTextArea);
-}
+    }
 
     async enterClientAddress(address: string): Promise<void> {
     await this.basePageEnterText(this.addressTextArea, address);
-}
+   }
 
-
-
-    async addCourse(): Promise<void> {
-        await this.basePageClickElement(this.addCourseButton);
+    async addCourse(): Promise<void> { 
+     await this.addCourseButton.evaluate((btn: HTMLElement) => btn.click());
     }
+
+
 }
 
     /* async selectCourse(index: number, course: string): Promise<void> {
